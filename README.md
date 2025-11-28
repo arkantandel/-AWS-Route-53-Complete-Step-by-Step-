@@ -53,8 +53,6 @@ graph TD
     E --> F[EC2 Instances]
 ```
 
----
-
 ## 🛠️ Step‑By‑Step: Create Hosted Zone & DNS Records
 
 ### ⚙️ Prerequisites
