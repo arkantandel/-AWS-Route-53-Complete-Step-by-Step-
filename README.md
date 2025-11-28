@@ -54,13 +54,6 @@ A container that holds DNS records for your domain.
 
 Route 53 can monitor endpoints and redirect traffic automatically if an endpoint becomes unhealthy.
 
----
-
-## 🏗️ Architecture Diagram (Mermaid)
-
-`mermaid$1`
-
----
 
 ## 🛠️ Step‑By‑Step: Create Hosted Zone & DNS Records
 
