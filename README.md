@@ -50,7 +50,17 @@ A container that holds DNS records for your domain.
 * **Geolocation Routing** – Based on user country
 * **Geoproximity** – Based on region bias
 
+### 4. **Health Checks**
 
+Route 53 can monitor endpoints and redirect traffic automatically if an endpoint becomes unhealthy.
+
+---
+
+## 🏗️ Architecture Diagram (Mermaid)
+
+`mermaid$1`
+
+---
 
 ## 🛠️ Step‑By‑Step: Create Hosted Zone & DNS Records
 
@@ -70,7 +80,15 @@ A container that holds DNS records for your domain.
 4. For Type choose **Public hosted zone**.
 5. Click **Create hosted zone**. Route 53 will create **NS** and **SOA** records automatically.
 
+**Mermaid:**
 
+```mermaid
+graph LR
+    A(You) --> B(Create Hosted Zone (example.com))
+    B --> C(NS & SOA records auto-created)
+```
+
+---
 
 ### 2) Create Records — Console (A, CNAME, TXT, MX, Alias)
 
@@ -95,8 +113,32 @@ A container that holds DNS records for your domain.
 
 ---
 
+### 3) Create Records — AWS CLI (examples)
 
+```bash
+# Create hosted zone
+aws route53 create-hosted-zone --name example.com --caller-reference "$(date +%s)"
 
+# Create an A record (change-batch JSON file)
+cat > change-batch.json <<EOF
+{
+  "Comment": "Create A record for example.com",
+  "Changes": ({
+    "Action": "CREATE",
+    "ResourceRecordSet": {
+      "Name": "example.com.",
+      "Type": "A",
+      "TTL": 300,
+      "ResourceRecords": ({"Value": "203.0.113.10"})
+    }
+  })
+}
+EOF
+
+aws route53 change-resource-record-sets --hosted-zone-id <HOSTED_ZONE_ID> --change-batch file://change-batch.json
+```
+
+---
 
 ### 4) Create a Health Check & Configure Failover
 
@@ -104,7 +146,9 @@ A container that holds DNS records for your domain.
 2. Enter endpoint (IP/URL), protocol, and failure threshold.
 3. Save and then create a **Failover** record set that references this health check (Primary/Secondary).
 
-**Mermaid (Failover):**
+**Mermaid (Failover):
+
+*(Removed due to GitHub rendering issue — you can ask me anytime to add a fixed version.)*
 
 ```mermaid
 graph LR
@@ -114,6 +158,26 @@ graph LR
 
 ---
 
+### 5) CloudFormation snippet (Hosted Zone + A Record)
+
+```yaml
+Resources:
+  MyHostedZone:
+    Type: AWS::Route53::HostedZone
+    Properties:
+      Name: example.com
+  RootARecord:
+    Type: AWS::Route53::RecordSet
+    Properties:
+      HostedZoneName: !Ref MyHostedZone
+      Name: example.com.
+      Type: A
+      TTL: '300'
+      ResourceRecords:
+        - '203.0.113.10'
+```
+
+---
 
 ### 6) Verify DNS Propagation & Troubleshoot
 
@@ -257,6 +321,5 @@ Once registered, it is automatically added to Route 53.
 **Name:** Arkan Tandel
 **GitHub:** [https://github.com/](https://github.com/)
 **LinkedIn:** [https://linkedin.com/in/](https://linkedin.com/in/)
-**Email:** (arkantandel)
-
+**Email:** (arkantandel@gmail.com)
 
