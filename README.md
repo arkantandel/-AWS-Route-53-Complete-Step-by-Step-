@@ -80,15 +80,7 @@ Route 53 can monitor endpoints and redirect traffic automatically if an endpoint
 4. For Type choose **Public hosted zone**.
 5. Click **Create hosted zone**. Route 53 will create **NS** and **SOA** records automatically.
 
-**Mermaid:**
 
-```mermaid
-graph LR
-    A(You) --> B(Create Hosted Zone (example.com))
-    B --> C(NS & SOA records auto-created)
-```
-
----
 
 ### 2) Create Records — Console (A, CNAME, TXT, MX, Alias)
 
@@ -113,32 +105,8 @@ graph LR
 
 ---
 
-### 3) Create Records — AWS CLI (examples)
 
-```bash
-# Create hosted zone
-aws route53 create-hosted-zone --name example.com --caller-reference "$(date +%s)"
 
-# Create an A record (change-batch JSON file)
-cat > change-batch.json <<EOF
-{
-  "Comment": "Create A record for example.com",
-  "Changes": ({
-    "Action": "CREATE",
-    "ResourceRecordSet": {
-      "Name": "example.com.",
-      "Type": "A",
-      "TTL": 300,
-      "ResourceRecords": ({"Value": "203.0.113.10"})
-    }
-  })
-}
-EOF
-
-aws route53 change-resource-record-sets --hosted-zone-id <HOSTED_ZONE_ID> --change-batch file://change-batch.json
-```
-
----
 
 ### 4) Create a Health Check & Configure Failover
 
