@@ -50,9 +50,6 @@ A container that holds DNS records for your domain.
 * **Geolocation Routing** – Based on user country
 * **Geoproximity** – Based on region bias
 
-### 4. **Health Checks**
-
-Route 53 can monitor endpoints and redirect traffic automatically if an endpoint becomes unhealthy.
 
 
 ## 🛠️ Step‑By‑Step: Create Hosted Zone & DNS Records
