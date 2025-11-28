@@ -42,16 +42,7 @@ Route 53 can monitor endpoints and redirect traffic automatically if an endpoint
 
 ---
 
-## 🏗️ Architecture Diagram (Mermaid)
 
-```mermaid
-graph TD
-    A[User Browser] --> B[Route 53]
-    B --> C[DNS Query]
-    C --> D[Routing Policies]
-    D -->|Alias| E[Load Balancer]
-    E --> F[EC2 Instances]
-```
 
 ## 🛠️ Step‑By‑Step: Create Hosted Zone & DNS Records
 
