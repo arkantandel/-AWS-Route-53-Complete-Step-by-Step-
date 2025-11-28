@@ -124,26 +124,6 @@ graph LR
 
 ---
 
-### 5) CloudFormation snippet (Hosted Zone + A Record)
-
-```yaml
-Resources:
-  MyHostedZone:
-    Type: AWS::Route53::HostedZone
-    Properties:
-      Name: example.com
-  RootARecord:
-    Type: AWS::Route53::RecordSet
-    Properties:
-      HostedZoneName: !Ref MyHostedZone
-      Name: example.com.
-      Type: A
-      TTL: '300'
-      ResourceRecords:
-        - '203.0.113.10'
-```
-
----
 
 ### 6) Verify DNS Propagation & Troubleshoot
 
