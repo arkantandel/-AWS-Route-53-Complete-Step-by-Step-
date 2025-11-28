@@ -148,13 +148,17 @@ aws route53 change-resource-record-sets --hosted-zone-id <HOSTED_ZONE_ID> --chan
 
 **Mermaid (Failover):
 
-*(Removed due to GitHub rendering issue — you can ask me anytime to add a fixed version.)*
-
+````mermaid
+graph LR
+    A((Route 53)) --> B(Primary Health Check)
+    B --> C(Primary Endpoint)
+    A --> D(Secondary Health Check)
+    D --> E(Secondary Endpoint)
 ```mermaid
 graph LR
     A(Route 53) -->|Primary (health check)| B(Primary endpoint)
     A -->|Secondary| C(Secondary endpoint)
-```
+````
 
 ---
 
@@ -321,5 +325,16 @@ Once registered, it is automatically added to Route 53.
 **Name:** Arkan Tandel
 **GitHub:** [https://github.com/](https://github.com/)
 **LinkedIn:** [https://linkedin.com/in/](https://linkedin.com/in/)
-**Email:** (arkantandel@gmail.com)
+**Email:** (add if needed)
 
+---
+
+## ⭐ Final Notes
+
+* Always use **Alias Records** instead of CNAME for AWS resources.
+* Route 53 is globally distributed — no region selection needed.
+* Combine Route 53 with CloudFront for maximum performance.
+
+---
+
+If you want, I can also create **Load Balancer**, **VPC**, or **EC2** README in the same premium format!
