@@ -58,14 +58,7 @@ Route 53 can monitor endpoints and redirect traffic automatically if an endpoint
 
 ## 🏗️ Architecture Diagram (Mermaid)
 
-```mermaid
-graph TD
-    A[User Browser] --> B[Route 53]
-    B --> C[DNS Query]
-    C --> D[Routing Policies]
-    D -->|Alias| E[Load Balancer]
-    E --> F[EC2 Instances]
-```
+`mermaid$1`
 
 ---
 
@@ -91,8 +84,8 @@ graph TD
 
 ```mermaid
 graph LR
-    A[You] --> B[Create Hosted Zone (example.com)]
-    B --> C[NS & SOA records auto-created]
+    A(You) --> B(Create Hosted Zone (example.com))
+    B --> C(NS & SOA records auto-created)
 ```
 
 ---
@@ -130,15 +123,15 @@ aws route53 create-hosted-zone --name example.com --caller-reference "$(date +%s
 cat > change-batch.json <<EOF
 {
   "Comment": "Create A record for example.com",
-  "Changes": [{
+  "Changes": ({
     "Action": "CREATE",
     "ResourceRecordSet": {
       "Name": "example.com.",
       "Type": "A",
       "TTL": 300,
-      "ResourceRecords": [{"Value": "203.0.113.10"}]
+      "ResourceRecords": ({"Value": "203.0.113.10"})
     }
-  }]
+  })
 }
 EOF
 
@@ -157,8 +150,8 @@ aws route53 change-resource-record-sets --hosted-zone-id <HOSTED_ZONE_ID> --chan
 
 ```mermaid
 graph LR
-    A[Route 53] -->|Primary (health check)| B[Primary endpoint]
-    A -->|Secondary| C[Secondary endpoint]
+    A(Route 53) -->|Primary (health check)| B(Primary endpoint)
+    A -->|Secondary| C(Secondary endpoint)
 ```
 
 ---
@@ -254,14 +247,14 @@ This will generate NS and SOA records automatically.
 
 ```mermaid
 graph LR
-A[Route 53] --> B(Server A)
+A(Route 53) --> B(Server A)
 ```
 
 ### 🔹 Weighted Routing
 
 ```mermaid
 graph LR
-A[Route 53]
+A(Route 53)
 A -->|70%| B(Server A)
 A -->|30%| C(Server B)
 ```
@@ -270,9 +263,9 @@ A -->|30%| C(Server B)
 
 ```mermaid
 graph LR
-A[Route 53]
-A -->|Primary| B[Healthy Endpoint]
-A -->|Secondary| C[Failover Endpoint]
+A(Route 53)
+A -->|Primary| B(Healthy Endpoint)
+A -->|Secondary| C(Failover Endpoint)
 ```
 
 ---
@@ -326,8 +319,6 @@ Once registered, it is automatically added to Route 53.
 **Name:** Arkan Tandel
 **GitHub:** [https://github.com/](https://github.com/)
 **LinkedIn:** [https://linkedin.com/in/](https://linkedin.com/in/)
-**Email:** (arkantandel@gmail.com)
+**Email:** (arkantandel)
 
 
-
-If you want, I can also create **Load Balancer**, **VPC**, or **EC2** README in the same premium format!
